@@ -2,6 +2,8 @@
 
 Morse Code Lib is small project that allows to convert ASCII text to morse code and vice versa.
 
+Specs:<br/>
+.NET Framework version: 3.5 
 
 
 
