@@ -18,10 +18,10 @@ namespace MorseLib
         private const int LineDuration = 3 * DotDuration;
 
         // [ms] - duration of space - between chars
-        private const int SpacePauseDuration = 7 * DotDuration;
+        private const int SpacePauseDuration = 3 * DotDuration;
 
         // [ms] duration of tab - between words
-        private const int TabPauseDuration = 2 * SpacePauseDuration;
+        private const int TabPauseDuration = 7 * DotDuration;
 
         #endregion Settings properties
 
@@ -120,7 +120,8 @@ namespace MorseLib
                 {')',   "-.--.-"},
                 {'=',   "-...-"},
                 {'@',   ".--.-."},
-                {' ',   "\t"}
+                {' ',   "\t"},
+                {'\0',    "" }
             };
         }
 
@@ -191,12 +192,12 @@ namespace MorseLib
 
         public static string TranslateToText(string morseMessage)
         {
-            if (ValidateMorseMessage(morseMessage) == false)
+            if (ValidateMorseMessage(morseMessage, false) == false)
             {
                 return string.Empty;
             }
 
-            StringBuilder rezultBuilder = new StringBuilder();
+            StringBuilder rezultBuilder = new StringBuilder();            
 
             foreach (var symbol in morseMessage.Split(' '))
             {
@@ -219,9 +220,11 @@ namespace MorseLib
                 {
                     case '.':
                         Console.Beep(BeepFrequency, DotDuration);
+                        System.Threading.Thread.Sleep(DotDuration);
                         break;
                     case '-':
                         Console.Beep(BeepFrequency, LineDuration);
+                        System.Threading.Thread.Sleep(DotDuration);
                         break;
                     case ' ':
                         System.Threading.Thread.Sleep(SpacePauseDuration);
