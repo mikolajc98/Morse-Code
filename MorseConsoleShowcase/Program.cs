@@ -12,7 +12,15 @@ namespace MorseConsoleShowcase
 
             Console.WriteLine(msg);
             Console.WriteLine(msgTranslatedToMorse);
-            MorseCode.BeepMessage(msgTranslatedToMorse);
+
+            Console.WriteLine();
+
+            string msgMorse = "... --- ... \t ... --- ..."; // < '\t' is treated as space between word. This string will be converted into "sos sos". The same rule applies when using TranslateToMorse(string).
+
+            string msgTranslatedToASCII = MorseCode.TranslateToText(msgMorse);
+
+            Console.WriteLine(msgMorse);
+            Console.WriteLine(msgTranslatedToASCII);
 
             Console.ReadLine();
         }
