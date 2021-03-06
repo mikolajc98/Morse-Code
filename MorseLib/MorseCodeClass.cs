@@ -197,14 +197,14 @@ namespace MorseLib
                 return string.Empty;
             }
 
-            StringBuilder rezultBuilder = new StringBuilder();            
+            StringBuilder resultBuilder = new StringBuilder();            
 
             foreach (var symbol in morseMessage.Split(' '))
             {
-                rezultBuilder.Append(InvertedMorseCodeDictionary[symbol]);
+                resultBuilder.Append(InvertedMorseCodeDictionary[symbol]);
             }
 
-            return rezultBuilder.ToString();
+            return resultBuilder.ToString();
         }
 
         public static void BeepMessage(string morseCodeMessage)
