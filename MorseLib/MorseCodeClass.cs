@@ -163,8 +163,10 @@ namespace MorseLib
 
         public static string TranslateToMorse(string message)
         {
-            if (!ValidateTextMsg(message, false))
+            if (ValidateTextMsg(message, false) == false)
+            {
                 return string.Empty;
+            }
 
             StringBuilder resultBuilder = new StringBuilder();
 
