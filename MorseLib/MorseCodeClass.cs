@@ -25,28 +25,28 @@ namespace MorseLib
 
         #endregion Settings properties
 
-        static Dictionary<char, string> morseCodeDictionary;
-        static Dictionary<string, char> invertedMorseCodeDictionary;
+        private static Dictionary<char, string> _morseCodeDictionary;
+        private static Dictionary<string, char> _invertedMorseCodeDictionary;
 
-        public static Dictionary<char, string> MorseCodeDictionary
+        private static Dictionary<char, string> MorseCodeDictionary
         {
             get
             {
-                if (morseCodeDictionary is null)
-                    morseCodeDictionary = CreateDictionary();
+                if (_morseCodeDictionary is null)
+                    _morseCodeDictionary = CreateDictionary();
 
-                return morseCodeDictionary;
+                return _morseCodeDictionary;
             }
         }
 
-        public static Dictionary<string, char> InvertedMorseCodeDictionary
+        private static Dictionary<string, char> InvertedMorseCodeDictionary
         {
             get
             {
-                if (invertedMorseCodeDictionary is null)
-                    invertedMorseCodeDictionary = CreateInvertedDictionary();
+                if (_invertedMorseCodeDictionary is null)
+                    _invertedMorseCodeDictionary = CreateInvertedDictionary();
 
-                return invertedMorseCodeDictionary;
+                return _invertedMorseCodeDictionary;
             }
         }
 
@@ -124,6 +124,16 @@ namespace MorseLib
             };
         }
 
+        public static Dictionary<char, string> GetMorseDictionary()
+        {
+            return MorseCodeDictionary;
+        }
+
+        public static Dictionary<string, char> GetInvertedDictionary()
+        {
+            return InvertedMorseCodeDictionary;
+        }
+
         private static bool ValidateTextMsg(string textMessage, bool throwException = true)
         {
             foreach (var ch in textMessage.ToLower())
@@ -150,6 +160,7 @@ namespace MorseLib
                     case '.':
                     case '-':
                     case ' ':
+                    case '\t':
                         continue;
                     default:
                         string errorMsg = $"Char {ch} is not allowed in input string!";
